@@ -62,9 +62,10 @@ jobs:
       # - name: Deploy to GitHub Pages
       #   id: deployment
       #   uses: actions/deploy-pages@v4
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3  # 使用 peaceiris GitHub Actions 进行部署
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证
+        publish_dir: ./_site  # 指定构建输出目录为 _site
+        target_branch: gh-pages  # 设置部署目标分支为 gh-pages
+        commit_message: "Deploy Jekyll site to gh-pages"  # 提交消息
