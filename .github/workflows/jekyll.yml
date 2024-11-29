@@ -63,13 +63,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
-        - name: Deploy to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 PAT 代替 GITHUB_TOKEN
-            publish_dir: ./_site  # 输出目录
-            publish_branch: gh-pages  # 推送到 gh-pages 分支
-            commit_message: "Deploy Jekyll site to gh-pages"  # 提交信息
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
