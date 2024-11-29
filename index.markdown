@@ -5,11 +5,6 @@
 layout: home
 ---
 
-adawd
------
-
-## dawdaw
-
 Lidadwa awdaw wad awd
 
 ```cpp
