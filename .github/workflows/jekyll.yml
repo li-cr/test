@@ -59,12 +59,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v4
+
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-      - name: Push _site folder to gh-pages branch
-        uses: ad-m/github-push-action@v0.6.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages  # Specify the target branch (gh-pages)
-          folder: _site     # Specify the folder to push (the output of Jekyll build)
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
