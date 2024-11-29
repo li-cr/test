@@ -62,4 +62,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
+      - name: Push _site folder to gh-pages branch
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: gh-pages  # Specify the target branch (gh-pages)
+          folder: _site     # Specify the folder to push (the output of Jekyll build)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
