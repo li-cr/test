@@ -2,32 +2,38 @@ name: Deploy Jekyll
 
 on:
   push:
-    branches: [master]
-  workflow_dispatch:
+    branches: [master]  # 或者你使用的是 main 分支，可以改为 main
+  workflow_dispatch:  # 允许手动触发构建和部署
+
+permissions:
+  contents: write  # Allow write access to the repository contents
+  pages: write     # Allow write access to Pages (required for deploying)
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 使用 GitHub 提供的 Ubuntu 环境
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # 检出当前仓库代码
 
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@v1  # 设置 Ruby 环境
       with:
-        ruby-version: '3.1'
+        ruby-version: '3.1'  # 设置 Ruby 版本，根据需求更改
 
     - name: Install dependencies
       run: |
-        gem install bundler
-        bundle install
+        gem install bundler  # 安装 Bundler
+        bundle install  # 安装项目依赖
 
     - name: Build site
-      run: bundle exec jekyll build --destination _site
+      run: bundle exec jekyll build --destination _site  # 构建站点，将输出放到 _site 目录
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v3  # 使用 peaceiris GitHub Actions 进行部署
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证
+        publish_dir: ./_site  # 指定构建输出目录为 _site
+        target_branch: gh-pages  # 设置部署目标分支为 gh-pages
+        commit_message: "Deploy Jekyll site to gh-pages"  # 提交消息
